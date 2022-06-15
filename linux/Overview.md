@@ -11,9 +11,16 @@
     - [Save / Load Docker images](#save--load-docker-images)
     - [Docker volumes prune](#docker-volumes-prune)
   - [PostgreSQL](#postgresql)
-    - [Usage with Docker](#usage-with-docker)
   - [Save backup file](#save-backup-file)
+    - [Without Docker](#without-docker)
+    - [With Docker](#with-docker)
   - [Restore to DB](#restore-to-db)
+    - [Without Docker](#without-docker-1)
+    - [With Docker](#with-docker-1)
+  - [Transfering](#transfering)
+  - [SSH](#ssh)
+    - [Generate SSH key](#generate-ssh-key)
+    - [Copy SSH key to server](#copy-ssh-key-to-server)
 
 
 ## Authorization
@@ -52,14 +59,44 @@ docker volume prune
 
 ## PostgreSQL
 
-### Usage with Docker
-
 ## Save backup file
+### Without Docker
+```bash
+pg_dump -h ${PSQL_HOST} -p ${PSQL_PORT} -U ${PSQL_USER_NAME} -d ${PSQL_DB_NAME} > ${BACKUP_NAME}.sql
+```
+
+### With Docker
 ```bash
 docker exec ${PSQL_CONTAINER_NAME} pg_dump -U ${PSQL_USER_NAME} -d ${PSQL_DB_NAME} > ${BACKUP_NAME}.sql
 ```
 
 ## Restore to DB
+### Without Docker
+```bash
+psql -h ${PSQL_HOST} -p ${PSQL_PORT} -U ${PSQL_USER_NAME} -d ${PSQL_DB_NAME} < ${BACKUP_NAME}.sql
+```
+### With Docker
 ```bash
 docker exec -i ${PSQL_CONTAINER_NAME} psql -U ${PSQL_USER_NAME} -d ${PSQL_DB_NAME} < ${BACKUP_NAME}.sql
+```
+
+
+## Transfering
+```bash
+rsync -ravzh ${SOURCE_PATH} ${DESTINATION_PATH}
+```
+
+## SSH
+### Generate SSH key
+```bash
+ssh-keygen -t rsa -b 4096 -C "${USER_EMAIL}"
+```
+
+### Copy SSH key to server
+```bash
+ssh-copy-id -i ${PUBLIC_KEY_PATH}.pub ${SERVER_USER}@${SERVER_IP}
+```
+or you can copy the public key content directly to the server into file
+```
+cat ~/.ssh/authorized_keys
 ```

@@ -7,6 +7,12 @@
   - [Storage](#storage)
     - [Hard disk listing](#hard-disk-listing)
     - [Files/Folders sizes](#filesfolders-sizes)
+    - [Format Hard Drive file system](#format-hard-drive-file-system)
+    - [Mount Hard drive](#mount-hard-drive)
+  - [Hardware Information](#hardware-information)
+    - [Hard drive list](#hard-drive-list)
+    - [CPU](#cpu)
+    - [Hardware List](#hardware-list)
   - [Docker](#docker)
     - [Save / Load Docker images](#save--load-docker-images)
     - [Docker volumes prune](#docker-volumes-prune)
@@ -43,6 +49,34 @@ List files/folders in path toghether with their size, sort reversed
 ```bash
 sudo du -h -d 1 ${PATH} | sort -rh
 ```
+
+### Format Hard Drive file system
+Should use `fdisk` first to know ${DEVICE_PATH}
+```bash
+sudo mkfs -t ext4 ${DEVICE_PATH}
+```
+### Mount Hard drive
+```
+sudo mount ${DEVICE_PATH} ${ABSOLUTE_PATH}
+```
+
+## Hardware Information
+
+### Hard drive list
+```bash
+sudo fdisk -l
+```
+
+### CPU
+```bash
+lscpu
+```
+
+### Hardware List
+```bash
+lshw
+```
+
 
 ## Docker
 
@@ -100,3 +134,4 @@ or you can copy the public key content directly to the server into file
 ```
 cat ~/.ssh/authorized_keys
 ```
+****

@@ -3,7 +3,15 @@
 ## Table of Contents
 - [Linux Command cheatsheet](#linux-command-cheatsheet)
   - [Table of Contents](#table-of-contents)
-  - [Authorization](#authorization)
+  - [User, Group](#user-group)
+    - [List user's name](#list-users-name)
+    - [List Group](#list-group)
+    - [Create Group](#create-group)
+    - [Add ${USER} to ${GROUP_NAME}](#add-user-to-group_name)
+  - [Permission](#permission)
+    - [Change USER ownership of folders/files](#change-user-ownership-of-foldersfiles)
+    - [Change GROUP ownership of folders/files](#change-group-ownership-of-foldersfiles)
+    - [Change permissions on directory/files](#change-permissions-on-directoryfiles)
   - [Storage](#storage)
     - [Hard disk listing](#hard-disk-listing)
     - [Files/Folders sizes](#filesfolders-sizes)
@@ -29,11 +37,55 @@
     - [Copy SSH key to server](#copy-ssh-key-to-server)
 
 
-## Authorization
+## User, Group
 
-Change ownership of folders/files
+### List user's name
+```bash
+echo ${USER}
+```
+
+### List Group
+```bash
+groups
+```
+
+### Create Group
+```bash
+sudo groupadd ${GROUP_NAME}
+```
+
+### Add ${USER} to ${GROUP_NAME}
+```bash
+sudo usermod -aG ${GROUP_NAME} ${USER}
+```
+
+## Permission
+```bash
+$ ls -l some_dir
+d rwx rwx r-x 2 alex consult 4096 Feb 20 10:10 some_dir/
+  ^^^ ^^^ ^^^    ^     ^
+  \|/ \|/ \|/    |     |_____ directory's Group
+   |   |   |     |___________ directory's Owner
+   |   |   |_________________ Other permission
+   |   |_____________________ Group permission
+   |_________________________ Owner permission
+```
+
+### Change USER ownership of folders/files
 ```bash
 chown -R ${USER} ${PATH}
+```
+
+### Change GROUP ownership of folders/files
+```bash
+chgrp -R ${GROUP_NAME} ${PATH}
+```
+
+### Change permissions on directory/files
+Permisson code can get from here https://chmodcommand.com
+
+```bash
+chmod -R ${PERMISSION_CODE} ${PATH}
 ```
 
 ## Storage

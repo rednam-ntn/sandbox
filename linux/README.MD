@@ -186,4 +186,16 @@ or you can copy the public key content directly to the server into file
 ```
 cat ~/.ssh/authorized_keys
 ```
+
+## GCP gcloud commands
+
+### gcloud compute
+- SSH
+```bash
+gcloud compute ssh "instance-name" --project "project-name"
+```
+- File transfering
+```bash
+gcloud compute scp "instance-name":/path-to-instance-file.dump /path-to-local-file.dump --project "project-name"
+```
 ****

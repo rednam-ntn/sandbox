@@ -146,6 +146,7 @@ docker volume prune
 ## PostgreSQL
 
 ## Save backup file
+https://www.postgresql.org/docs/current/app-pgdump.html
 ### Without Docker
 ```bash
 pg_dump -h ${PSQL_HOST} -p ${PSQL_PORT} -U ${PSQL_USER_NAME} -d ${PSQL_DB_NAME} > ${BACKUP_NAME}.sql

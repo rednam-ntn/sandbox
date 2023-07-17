@@ -167,7 +167,16 @@ psql -h ${PSQL_HOST} -p ${PSQL_PORT} -U ${PSQL_USER_NAME} -d ${PSQL_DB_NAME} < $
 docker exec -i ${PSQL_CONTAINER_NAME} psql -U ${PSQL_USER_NAME} -d ${PSQL_DB_NAME} < ${BACKUP_NAME}.sql
 ```
 
+## MongoDB
+- Dump
+```bash
+mongodump --uri "mongodb+srv://<user>:<password>@<server-uri>/<db-name>" -o ./mongo-backup --collection=<collection-name> --gzip --authenticationDatabase=admin
+```
 
+- Restore
+```bash
+mongorestore --uri "mongodb://<user>:<password>@127.0.0.1:27017" --authenticationDatabase=admin ./mongo-backup/
+```
 ## Transfering
 ```bash
 rsync -ravzh ${SOURCE_PATH} ${DESTINATION_PATH}
